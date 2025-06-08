@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task6</title>
+    <link rel="stylesheet" href="task6.css">
+</head>
+<body>
+    <div class = "formcontainer">
+        <h2>Contact Form</h2>
+        <form id = "contactform" action="#" method="post">
+            <label for = "name">Name</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your Name">
+            <div class = "error" id = "nameerror"></div>
+            <label for = "email">Email</label>
+            <input type = "email" id = "email" name="email" placeholder="email ID">
+            <div class = "error" id = "emailerror"></div>
+            <label for = "messages">Messages</label>
+            <textarea id = "messages" name="messages" rows="5" required placeholder="Your Message"></textarea>
+            <div class = "error" id = "messageerror"></div>
+            <button type="submit">Send Messages</button>
+            <div class = "success" id = "successMessage"></div>
+
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('contactform');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('messages');
+    
+        const nameerror = document.getElementById('nameerror');
+        const emailerror = document.getElementById('emailerror');
+        const messageerror = document.getElementById('messageerror');
+        const successmsg = document.getElementById('successMessage');
+    
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            
+            nameerror.textContent = '';
+            emailerror.textContent = '';
+            messageerror.textContent = '';
+            successmsg.textContent = '';
+    
+            let isValid = true;
+    
+            
+            if (nameInput.value.trim() === '') {
+                nameerror.textContent = 'Name is required';
+                isValid = false;
+            }
+    
+            if (emailInput.value.trim() === '') {
+                emailerror.textContent = 'Email is required.';
+                isValid = false;
+            } else if (!emailRegex.test(emailInput.value.trim())) {
+                emailerror.textContent = 'Invalid email format.';
+                isValid = false;
+            }
+    
+            
+            if (messageInput.value.trim() === '') {
+                messageerror.textContent = 'Message is required';
+                isValid = false;
+            }
+    
+        
+            if (isValid) {
+                successmsg.textContent = 'Form submitted successfully!';
+                form.reset();
+            }
+        });
+    </script>
+    
+</body>
+</html>
